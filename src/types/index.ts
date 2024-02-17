@@ -1,11 +1,11 @@
 // ====== USER Interface
-export type IUser = {
-    _id: number;
-    username: string;
-    email: string;
-    password: string;
-    imgUrl: string;
-}
+// export type IUser = {
+//     _id: number;
+//     username: string;
+//     email: string;
+//     password: string;
+//     imgUrl: string;
+// }
 
 export type CreateUserParams = {
     username: string
