@@ -1,5 +1,7 @@
-import { IUser } from "../../../types";
-import { userSchema, User } from "../../../database/models/user.model";
+// import { IUser } from "../../../types";
+import { User } from "../../../database/models/user.model";
+import { userSchema } from "../../../database/validator";
+import { z } from 'zod';
 
 const createUsersService = async ({
   _id,
@@ -7,21 +9,25 @@ const createUsersService = async ({
   email,
   password,
   imgUrl,
-}: IUser): Promise<IUser> => {
+}: z.infer<typeof userSchema>) => {
+
   try {
+    // Validar os dados usando o schema do Zod
+    userSchema.parse({_id, email, username, password, imgUrl });
+
     const newUser = new User({
       _id,
-      username,
       email,
+      username,
       password,
       imgUrl,
     });
-
     await newUser.save();
     return newUser;
+
   } catch (error) {
-    console.error('Erro ao criar usuário:', error);
-    throw new Error("Falha ao criar usuário");
+      console.error('Erro ao criar usuário:', error);
+      throw new Error("Falha ao criar usuário");
   }
 };
 
