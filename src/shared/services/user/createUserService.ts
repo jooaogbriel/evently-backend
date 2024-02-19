@@ -2,14 +2,18 @@
 import { User } from "../../../database/models/user.model";
 import { userSchema } from "../../../database/validator";
 import { z } from 'zod';
+import { v4 as uuidv4 } from 'uuid';
+import bcrypt from "bcryptjs";
 
 const createUsersService = async ({
-  _id,
   username,
   email,
   password,
   imgUrl,
 }: z.infer<typeof userSchema>) => {
+
+  const _id = uuidv4();
+  const hashedPassword = bcrypt.hashSync(password, 10);
 
   try {
     // Validar os dados usando o schema do Zod
@@ -17,10 +21,11 @@ const createUsersService = async ({
 
     const newUser = new User({
       _id,
-      email,
       username,
-      password,
+      email,
+      password: hashedPassword,
       imgUrl,
+      privated: false
     });
     await newUser.save();
     return newUser;

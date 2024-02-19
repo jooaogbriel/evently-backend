@@ -2,8 +2,8 @@ import { User } from "../../../database/models/user.model";
 
 const listUserService = async () => {
     try {
-        const user = await User.find({})
-        return user
+        const users = await User.find({})
+        return users
     } catch (error) {
         console.error(error)
     }

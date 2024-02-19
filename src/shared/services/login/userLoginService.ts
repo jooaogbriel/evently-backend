@@ -1,4 +1,3 @@
-import { userSchema } from '../../../database/validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../../../database/models/user.model';
@@ -11,8 +10,6 @@ const loginSchema = z.object({
     password: z.string(),
   });
 const userLoginService = async({email, password}: z.infer<typeof loginSchema>) => {
-
-    
 
     const user = await User.findOne({ email });
 
