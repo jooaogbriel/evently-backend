@@ -5,7 +5,15 @@ const userSchema = z.object({
   username: z.string(),
   password: z.string(),
   imgUrl: z.string(),
-  
 });
 
-export { userSchema };
+const updateUserSchema = z.object({
+  email: z.string().email(),
+  username: z.string(),
+  password: z.string(),
+  imgUrl: z.string(),
+  privated: z.boolean()
+});
+
+
+export { userSchema, updateUserSchema };
