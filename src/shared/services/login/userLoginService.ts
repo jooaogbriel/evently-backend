@@ -11,16 +11,21 @@ const loginSchema = z.object({
   });
 const userLoginService = async({email, password}: z.infer<typeof loginSchema>) => {
 
-    const user = await User.findOne({ email });
+    try {
+        const user = await User.findOne({ email });
 
-    if (!user || !bcrypt.compareSync(password, user.password)) {
-        return null;
+        if (!user || !bcrypt.compareSync(password, user.password)) {
+            return null;
+        }
+
+        const token = jwt.sign({ userId: user._id, email: user.email }, jwtSecret, {
+            expiresIn: '24h'
+        })
+
+        return token
+    } catch (error) {
+        console.error()
     }
-
-    const token = jwt.sign({ userId: user._id, email: user.email }, jwtSecret, {
-        expiresIn: '24h'
-    })
-
-    return token
+    
 }
 export { userLoginService }

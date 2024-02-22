@@ -16,7 +16,6 @@ const createUsersService = async ({
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   try {
-    // Validar os dados usando o schema do Zod
     userSchema.parse({_id, email, username, password, imgUrl });
 
     const newUser = new User({
@@ -25,13 +24,17 @@ const createUsersService = async ({
       email,
       password: hashedPassword,
       imgUrl,
-      privated: false
+      privated: false,
+      followers: 0,
+      following: 0,
+      likes: [],
+      comments: [],
+      posts: []
     });
     await newUser.save();
     return newUser;
 
   } catch (error) {
-      console.error('Erro ao criar usuário:', error);
       throw new Error("Falha ao criar usuário");
   }
 };
