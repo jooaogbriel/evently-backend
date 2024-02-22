@@ -15,5 +15,11 @@ const updateUserSchema = z.object({
   privated: z.boolean()
 });
 
+const postsSchema = z.object({
+  userId: z.string(),
+  content: z.string(),
+  imgUrl: z.string(),
+})
 
-export { userSchema, updateUserSchema };
+
+export { userSchema, updateUserSchema, postsSchema };

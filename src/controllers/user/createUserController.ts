@@ -1,9 +1,9 @@
 import { Response, Request } from "express";
 import createUsersService from "../../shared/services/user/createUserService";
 
-export const createUserController = async (req: Request, res: Response) => {
+export const createUserController = async ({body}:Request, res: Response) => {
     try {
-		const {  username, email, password, imgUrl } = req.body
+		const {  username, email, password, imgUrl } = body
 
 		const user = await createUsersService({
             username,
@@ -11,7 +11,6 @@ export const createUserController = async (req: Request, res: Response) => {
 			password,
 			imgUrl,
         })
-
 		return res.status(201).json(user)
 	} catch (error) {
 		if (error instanceof Error) {
@@ -21,3 +20,4 @@ export const createUserController = async (req: Request, res: Response) => {
 		}
 	}
 }
+
