@@ -1,0 +1,6 @@
+const listPostsService = () => {
+
+    
+
+}
+export { listPostsService }

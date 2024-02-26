@@ -9,7 +9,7 @@ const userModel = new mongoose.Schema({
     privated: { type: Boolean },
     followers: {type: Number},
     following: { type: Number },
-    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    posts: [{ type: Object, ref: 'Post' }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }], 
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
