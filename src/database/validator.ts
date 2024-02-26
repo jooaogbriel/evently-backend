@@ -16,7 +16,7 @@ const updateUserSchema = z.object({
 });
 
 const postsSchema = z.object({
-  userId: z.string(),
+  ownerId: z.string(),
   content: z.string(),
   imgUrl: z.string(),
 })

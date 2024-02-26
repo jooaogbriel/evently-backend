@@ -2,8 +2,9 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../../../database/models/user.model';
 import { z } from 'zod';
+require('dotenv').config()
 
-const jwtSecret = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+const jwtToken = process.env.JWT_TOKEN
 
 const loginSchema = z.object({
     email: z.string().email(),
@@ -18,7 +19,7 @@ const userLoginService = async({email, password}: z.infer<typeof loginSchema>) =
             return null;
         }
 
-        const token = jwt.sign({ userId: user._id, email: user.email }, jwtSecret, {
+        const token = jwt.sign({ email: email,userId: user._id }, String(jwtToken!), {
             expiresIn: '24h'
         })
 

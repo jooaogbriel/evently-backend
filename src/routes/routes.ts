@@ -1,5 +1,6 @@
 import { userLoginController } from "../controllers/login/userLoginController";
 import { createPostController } from "../controllers/posts/createPostController";
+import { listPostsController } from "../controllers/posts/listPostsController";
 import { createUserController } from "../controllers/user/createUserController";
 import { deleteUserController } from "../controllers/user/deleteUserController";
 import { listUserByIdController } from "../controllers/user/listUserById.controller";
@@ -16,5 +17,7 @@ router.get('/getUsers/:id', listUserByIdController)
 router.post('/login', userLoginController)
 router.patch('/updateUser/:id', updateUserController)
 router.delete('/deleteUser/:id', deleteUserController)
+
 router.post('/createPost',authMiddleware ,createPostController)
+router.get('/listPosts', authMiddleware, listPostsController)
 export {router}

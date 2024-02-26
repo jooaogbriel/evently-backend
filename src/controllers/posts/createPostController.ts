@@ -3,15 +3,16 @@ import { createPostsService } from "../../shared/services/posts/createPostsServi
 
 const createPostController = async(req: Request, res: Response) => {
     try {
-    const { content, imgUrl } = req.body
-    const userId = req.user?.userId;
-    console.log(userId)
-    const post = await createPostsService({
-        content, 
-        imgUrl, 
-        userId,
-    })
-    return res.status(201).json(post);
+        const { content, imgUrl } = req.body
+        const userId = req.user?.userId;
+        console.log('userID:', userId)
+        const post = await createPostsService({
+            content, 
+            imgUrl, 
+            ownerId: userId as string,
+        })
+        console.log('Controlador - req.user:', req.user);
+        return res.status(201).json(post);
 
     } catch (error) {
         console.error(error);

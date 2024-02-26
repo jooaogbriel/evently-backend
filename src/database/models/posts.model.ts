@@ -8,7 +8,7 @@ const commentModel = new mongoose.Schema({
 
 const postsModel = new mongoose.Schema({
     _id: { type: String, required: true },
-    ownerPost: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    ownerId: { type: String, ref: 'User', required: true },
     content: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     imageUrl: { type: String },

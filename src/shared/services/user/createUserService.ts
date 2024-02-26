@@ -29,7 +29,7 @@ const createUsersService = async ({
       following: 0,
       likes: [],
       comments: [],
-      posts: []
+      posts:[]
     });
     await newUser.save();
     return newUser;
