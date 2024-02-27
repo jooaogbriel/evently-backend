@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { number } from "zod";
 
 const userModel = new mongoose.Schema({
     _id: { type: String, required: true },
@@ -7,13 +8,26 @@ const userModel = new mongoose.Schema({
     password: { type: String, required: true },
     imgUrl : { type: String, required: true },
     privated: { type: Boolean },
-    followers: {type: Number},
-    following: { type: Number },
-    posts: [{ type: Object, ref: 'Post' }],
+    followers: { type:Number, ref: 'User' },
+    following: { type: Number, ref: 'User' },
+    posts: [{ type: Object, ref: 'Post',}],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }], 
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
+userModel.methods.follow = function(userId: string) {
+    if (!this.following.includes(userId)) {
+        this.following.push(userId);
+        return this.save();
+    }
+    return Promise.resolve(this);
+};
+
+userModel.methods.unfollow = function(userId: string) {
+    this.following.pull(userId);
+    return this.save();
+};
+userModel.plugin(require('mongoose-autopopulate'));
 const User = mongoose.model('User', userModel);
 
 export { userModel, User }

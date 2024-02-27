@@ -7,6 +7,11 @@ const userSchema = z.object({
   imgUrl: z.string(),
 });
 
+const getUserSchema = z.object({
+  username: z.string(),
+  imgUrl: z.string()
+})
+
 const updateUserSchema = z.object({
   email: z.string().email(),
   username: z.string(),
@@ -22,4 +27,4 @@ const postsSchema = z.object({
 })
 
 
-export { userSchema, updateUserSchema, postsSchema };
+export { userSchema, updateUserSchema, postsSchema, getUserSchema };

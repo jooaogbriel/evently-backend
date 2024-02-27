@@ -23,8 +23,9 @@ const createPostsService = async ({ content, imgUrl, ownerId }: z.infer<typeof p
         console.log('POST NOVOOO', newPost)
         await newPost.save();
         const user = await User.findById({ _id: ownerId });
+        console.log('USER NO SERVICE:', user)
         if (user) {
-            user.posts.push(newPost); 
+            user?.posts.push(newPost)
             await user.save();
         } else {
             console.error('Usuário não encontrado.');

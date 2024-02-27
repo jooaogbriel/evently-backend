@@ -11,7 +11,7 @@ const deleteUserController = async(req: Request, res: Response) => {
             message: 'User not found',
           });
         }
-    
+        
         return res.json({ message: 'deleted', deletedUser });
       } catch (error) {
         if (error instanceof Error) {
