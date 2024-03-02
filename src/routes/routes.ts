@@ -17,7 +17,7 @@ router.post('/createUser', createUserController)
 router.get('/getUsers', listUserController)
 router.get('/getUsers/:id', listUserByIdController)
 router.post('/login', userLoginController)
-router.patch('/updateUser/:id', updateUserController)
+router.patch('/updateUser/:id', authMiddleware, updateUserController)
 router.delete('/deleteUser/:id', deleteUserController)
 router.post('/follow', authMiddleware, followUserController)
 
