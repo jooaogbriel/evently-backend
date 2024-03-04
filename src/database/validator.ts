@@ -26,5 +26,10 @@ const postsSchema = z.object({
   imgUrl: z.string(),
 })
 
+const postsUpdate = z.object({
+  content: z.string(),
+  imgUrl: z.string()
+})
 
-export { userSchema, updateUserSchema, postsSchema, getUserSchema };
+
+export { userSchema, updateUserSchema, postsSchema, getUserSchema, postsUpdate };
