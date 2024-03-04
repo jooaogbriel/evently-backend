@@ -25,5 +25,5 @@ router.post('/follow', authMiddleware, followUserController)
 router.post('/createPost',authMiddleware ,createPostController)
 router.get('/listPosts', authMiddleware, listPostsController)
 router.delete('/deletePost/:id', authMiddleware, deletePostsController)
-router.patch('updatePost/:id', authMiddleware, updatePostController)
+router.patch('/updatePost/:id', authMiddleware, updatePostController)
 export {router}
